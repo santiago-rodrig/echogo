@@ -1,11 +1,19 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
 	"strings"
 )
 
+var n = flag.Bool("n", false, "Trim newline character from the end")
+var sep = flag.String("sep", " ", "Arguments separator character")
+
 func main() {
-	fmt.Println(strings.Join(os.Args[1:], " "))
+	flag.Parse()
+	fmt.Print(strings.Join(flag.Args(), *sep))
+
+	if !*n {
+		fmt.Println()
+	}
 }
